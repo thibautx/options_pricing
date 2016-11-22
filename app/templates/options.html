@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% from 'input.html' import input with context%}
+
+{% block content %}
+<h1>Options P/L Calculator</h1>
+{{ input() }}
+	{% if positions is defined %}
+{% for position in positions %}
+	{{ position }}<br>
+{% endfor %}
+	{% endif  %}
+<div id="plot">
+{{ plot|safe }}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function(){
+var i = 1;
+$("#add_row").click(function(){
+	$('#rows').append('<tr id="row'+(i+1)+'"></tr>');
+		console.log("appended row header");
+		var new_row="";
+		new_row += "		<td>";
+		new_row += "						<select id=\"side\" name=\"side"+(i+1)+"\" class=\"form-control\">";
+		new_row += "							<option value=\"buy\">Buy<\/option>";
+		new_row += "							<option value=\"sell\">Sell<\/option>";
+		new_row += "						<\/select>";
+		new_row += "					<\/td>";
+		new_row += "					<td>";
+		new_row += "						<input type=\"number\" class=\"form-control\" name=\"quantity"+(i+1)+"\" value=\"\"\/>";
+		new_row += "					<\/td>";
+		new_row += "					<td>";
+		new_row += "						<select id=\"type\" name=\"instrument"+(i+1)+"\" class=\"form-control\">";
+		new_row += "							<option value=\"call\">Call<\/option>";
+		new_row += "							<option value=\"put\">Put<\/option>";
+		new_row += "							<option value=\"stock\">Stock<\/option>";
+		new_row += "						<\/select>";
+		new_row += "					<\/td>";
+		new_row += "					<td>";
+		new_row += "						<input type=\"number\" class=\"form-control\" name=\"strike"+(i+1)+"\" value=\"\"\/>";
+		new_row += "					<\/td>";
+		new_row += "					<td>";
+		new_row += "						<input type=\"number\" class=\"form-control\" name=\"dte"+(i+1)+"\" value=\"\"\/>";
+		new_row += "					<\/td>";
+		new_row += "					<td>";
+		new_row += "						<input type=\"number\" class=\"form-control\" name=\"vol"+(i+1)+"\" value=\"\"\/>";
+		new_row += "					<\/td>";
+		new_row += "					<td>";
+		new_row += "						<input type=\"number\" class=\"form-control\" name=\"price"+(i+1)+"\" value=\"\"\/>";
+		new_row += "					<\/td>";
+		$('#row'+(i+1)).html(new_row);
+		i++;
+	});
+	 $("#delete_row").click(function(){
+		 if(i>1){
+	 $("#row"+(i)).html('');
+	 i--;
+	 }
+ });
+});
+</script>
+{% endblock %}

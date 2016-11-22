@@ -1,0 +1,53 @@
+{% macro input() %}
+<a id="add_row" class="btn btn-success">Add Leg</a>
+<a id='delete_row' class="btn btn-danger">Remove Leg</a>
+<br>
+<form class="form-horizontal" action="{{ url_for('query') }}" method="POST">
+	<div class="table-responsive">
+		<table class="table table-bordered table-striped table-highlight" id="rows">
+			<thead>
+				<th>Buy/Sell</th>
+				<th>Quantity</th>
+				<th>Call/Put/Stock</th>
+				<th>Strike</th>
+				<th>Days to Expiry</th>
+				<th>Volatility (%)</th>
+				<th>Price</th>
+			</thead>
+			<tbody>
+				<tr id="row1">
+					<td>
+						<select id="side" name="side1" class="form-control">
+							<option value="buy">Buy</option>
+							<option value="sell">Sell</option>
+						</select>
+					</td>
+					<td>
+						<input type="number" class="form-control" name="quantity1" value=""/>
+					</td>
+					<td>
+						<select id="type" name="instrument1" class="form-control">
+							<option value="call">Call</option>
+							<option value="put">Put</option>
+							<option value="stock">Stock</option>
+						</select>
+					</td>
+					<td>
+						<input type="number" class="form-control" name="strike1" value=""/>
+					</td>
+					<td>
+						<input type="number" class="form-control" name="dte1" value=""/>
+					</td>
+					<td>
+						<input type="number" class="form-control" name="vol1" value=""/>
+					</td>
+					<td>
+						<input type="number" class="form-control" name="price1" value=""/>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<input type="submit" class="btn btn-primary btn-lg" value="Submit">
+</form>
+{% endmacro %}
